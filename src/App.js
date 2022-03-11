@@ -9,6 +9,31 @@ const imagenesEnCartas = [
     {"src": "/imagenes/r2d2.png"}
 ]
 
+function CartaSeparada({carta, administrarEleccion}){
+    
+    const establecerClick = () =>{
+        administrarEleccion(carta)
+    }
+
+    return(
+    <div className = 'carta'>
+        <div>
+            <img 
+            className = 'frente' 
+            alt = 'frente-carta' 
+            src = {carta.src}
+            />
+            <img 
+            className = 'vuelta' 
+            alt = 'volteada-carta' 
+            src = '/imagenes/star_wars_logo.gif'
+            onClick = {establecerClick}
+            />
+        </div>
+    </div>
+    )
+}
+
 function App(){
 
     // Creamos un estado en el que 'cartas' es nuestra variable y 'establecerCartas' es nuestro metodo
@@ -18,6 +43,10 @@ function App(){
     // Creamos un estado en el que 'turnos' es nuestra variable y 'establecerTurnos' es nuestro metodo
     // Lo instanciamos a que empiece con 0 turnos usados
     const [turnos, establecerTurnos] = React.useState(0)
+
+    // Creamos estados para las elecciones que el jugador elige:
+    const [primeraEleccion, establecerPrimeraEleccion] = React.useState(null)
+    const [segundaEleccion, establecerSegundaEleccion] = React.useState(null)
 
     // Aleatorizamos las cartas:
     const aleatorizarCartas = () =>{
@@ -41,7 +70,15 @@ function App(){
         margin: '40px auto'
     }
 
-    console.log(cartas,turnos)
+    // Creamos una manera de administrar las elecciones que el usuario elige en los turnos:
+    const administrarEleccion = (carta) =>{
+        if(primeraEleccion != null){
+            establecerSegundaEleccion(carta)
+        }
+        else{
+            establecerPrimeraEleccion(carta)
+        }
+    }
 
     return(
         <div style={style_app}>
@@ -51,12 +88,11 @@ function App(){
 
             <div className = 'plantilla-carta'>
                 { cartas.map( carta => (
-                    <div className = 'carta' key = {carta.id }>
-                        <div>
-                            <img className = 'frente' alt = 'frente-carta' src = {carta.src}/>
-                            <img className = 'vuelta' alt = 'volteada-carta' src = '/imagenes/physics.png'/>
-                        </div>
-                    </div>
+                    <CartaSeparada 
+                        key = {carta.id} 
+                        carta = {carta}
+                        administrarEleccion = {administrarEleccion} 
+                    />
                 ))}
             </div>
         </div>  

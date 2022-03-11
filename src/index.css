@@ -5,7 +5,12 @@ body {
   margin: 0;
   font-size: 1.5em;
   text-align: center;
-  background: rgb(51, 92, 103);
+  /* background: rgb(51, 92, 103); */
+  background: linear-gradient(
+    to bottom right,
+    rgb(51, 92, 103) 0%,
+    rgb(33, 45, 47) 100%
+  );
   color: #fff3b0;
 }
 
@@ -37,11 +42,23 @@ img {
   grid-gap: 20px;
 }
 
+.carta {
+  position: relative;
+}
+
+.carta img {
+  width: 100%;
+  display: block;
+  border: 2px solid #fff3b0;
+  border-radius: 6px;
+  background-color: #9e2a2b;
+}
+
 /* h1 {
   display: block;
   white-space: nowrap;
   border-right: 4px solid;
-  width: 30ch;
+  width: 20ch;
   animation: typing 2s steps(20), blink 0.5s infinite step-end alternate;
   overflow: hidden;
 }
