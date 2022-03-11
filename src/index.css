@@ -25,7 +25,19 @@ button:hover {
   color: #fff3b0;
 }
 
-h1 {
+img {
+  height: 200px;
+  width: 200px;
+}
+
+.plantilla-carta {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+
+/* h1 {
   display: block;
   white-space: nowrap;
   border-right: 4px solid;
@@ -44,4 +56,4 @@ h1 {
   50% {
     border-color: transparent;
   }
-}
+} */

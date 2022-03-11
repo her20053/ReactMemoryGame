@@ -45,8 +45,20 @@ function App(){
 
     return(
         <div style={style_app}>
+            
             <h1>Laboratorio React JS</h1>
             <button onClick = {aleatorizarCartas}>Nuevo Juego</button>
+
+            <div className = 'plantilla-carta'>
+                { cartas.map( carta => (
+                    <div className = 'carta' key = {carta.id }>
+                        <div>
+                            <img className = 'frente' alt = 'frente-carta' src = {carta.src}/>
+                            <img className = 'vuelta' alt = 'volteada-carta' src = '/imagenes/physics.png'/>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>  
     )
 }
