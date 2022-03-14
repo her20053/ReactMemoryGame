@@ -57,7 +57,8 @@ function App(){
         .sort(() => Math.random() - 0.5 ) /*Creamos una arrow function que si el numero es positivo cambiara de posicion la carta*/
         // Para la nueva array ya aleatorizada por cada elemento aplicamos un id:
         .map((carta) => ({ ...carta, id: Math.random()})) /*Descomponemos sus atributos que solo son src y le agregamos un rnd id */
-    
+    establecerPrimeraEleccion(null)
+    establecerSegundaEleccion(null)
     // Utilizamos el metodo del estado creado previamente y le enviamos como parametro las cartas aleatorias:
     establecerCartas(cartasAleatorizadas)
     // Establecemos el valor de turnos a 0 al crear un nuevo juego presionando el boton:
@@ -115,15 +116,25 @@ function App(){
         if (c.encontada){conts++}
     });
     if(conts == 12){
-        console.log('eureka')
+        setTimeout(() => {alert("Felicidades! Has completado el juego!!")}, 500)
+        // console.log('eureka')
     }
+
+    const abrirGithub = () =>{
+        window.open("https://github.com/her20053/ReactMemoryGame/commits/main")
+    }
+
+    React.useEffect(() => {
+        aleatorizarCartas()
+    },[])
 
     return(
         <div style={style_app}>
             
             <h1>Laboratorio React JS</h1>
+            <h4>Andres Hernandez Guerra 20053 | Turnos : {turnos}</h4>
             <button onClick = {aleatorizarCartas}>Nuevo Juego</button>
-
+            <button id = 'git' onClick = {abrirGithub}>Github</button>
             <div className = 'plantilla-carta'>
                 { cartas.map( carta => (
                     <CartaSeparada 
