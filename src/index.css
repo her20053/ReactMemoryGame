@@ -54,23 +54,23 @@ img {
   background-color: #9e2a2b;
 }
 
-/* h1 {
-  display: block;
-  white-space: nowrap;
-  border-right: 4px solid;
-  width: 20ch;
-  animation: typing 2s steps(20), blink 0.5s infinite step-end alternate;
-  overflow: hidden;
+.carta .vuelta {
+  transition-delay: 0.2s;
+  transition: all ease-in 0.2s;
 }
 
-@keyframes typing {
-  from {
-    width: 0;
-  }
+.volteada .vuelta {
+  transform: rotateY(90deg);
+  transition-delay: 0s;
 }
 
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
-} */
+.carta .frente {
+  transform: rotateY(90deg);
+  transition: all ease-in 0.2s;
+  position: absolute;
+}
+
+.volteada .frente {
+  transform: rotateY(0deg);
+  transition-delay: 0.2s;
+}

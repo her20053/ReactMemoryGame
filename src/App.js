@@ -1,15 +1,15 @@
 
 // Creamos una variable que mantenga un link src hacia las 6 posibles imagenes:
 const imagenesEnCartas = [
-    {"src": "/imagenes/darth-vader.png"},
-    {"src": "/imagenes/death-star.png"},
-    {"src": "/imagenes/jedi-order.png"},
-    {"src": "/imagenes/light-saber.png"},
-    {"src": "/imagenes/millennium-falcon.png"},
-    {"src": "/imagenes/r2d2.png"}
+    {"src": "/imagenes/darth-vader.png", encontada: false},
+    {"src": "/imagenes/death-star.png", encontada: false},
+    {"src": "/imagenes/jedi-order.png", encontada: false},
+    {"src": "/imagenes/light-saber.png", encontada: false},
+    {"src": "/imagenes/millennium-falcon.png", encontada: false},
+    {"src": "/imagenes/r2d2.png", encontada: false}
 ]
 
-function CartaSeparada({carta, administrarEleccion}){
+function CartaSeparada({carta, administrarEleccion, volteada}){
     
     const establecerClick = () =>{
         administrarEleccion(carta)
@@ -17,7 +17,7 @@ function CartaSeparada({carta, administrarEleccion}){
 
     return(
     <div className = 'carta'>
-        <div>
+        <div className = {volteada ? 'volteada' : 'no_volteada'}>
             <img 
             className = 'frente' 
             alt = 'frente-carta' 
@@ -64,6 +64,12 @@ function App(){
     establecerTurnos(0)
     }
 
+    const resetearCartas = () => {
+        establecerPrimeraEleccion(null)
+        establecerSegundaEleccion(null)
+        establecerTurnos(turnos => turnos + 1)
+    }
+
     // Le creamos un estilo a la APP:
     const style_app = {
         maxWidth: '860px',
@@ -80,6 +86,38 @@ function App(){
         }
     }
 
+    // Comparar al momento que dos cartas ya no sean nulas:
+    React.useEffect(() => {
+        if(primeraEleccion && segundaEleccion){
+            if(primeraEleccion.src === segundaEleccion.src){
+                establecerCartas((cartasAnteriores) =>{
+                    return cartasAnteriores.map(c => {
+                        if(c.src === primeraEleccion.src){
+                            return {... c, encontada: true}
+                        }
+                        else{
+                            return c
+                        }
+                    })
+                })
+                resetearCartas()
+            }
+            else{
+                setTimeout(() => resetearCartas(), 1000)
+            }
+        }
+    }
+    ,[primeraEleccion,segundaEleccion])
+
+    const todas = false
+    var conts = 0
+    cartas.forEach(c => {
+        if (c.encontada){conts++}
+    });
+    if(conts == 12){
+        console.log('eureka')
+    }
+
     return(
         <div style={style_app}>
             
@@ -92,6 +130,7 @@ function App(){
                         key = {carta.id} 
                         carta = {carta}
                         administrarEleccion = {administrarEleccion} 
+                        volteada = {carta === primeraEleccion || carta === segundaEleccion || carta.encontada}
                     />
                 ))}
             </div>
