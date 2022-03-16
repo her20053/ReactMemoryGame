@@ -1,12 +1,12 @@
 
 // Creamos una variable que mantenga un link src hacia las 6 posibles imagenes:
 const imagenesEnCartas = [
-    {"src": "/imagenes/darth-vader.png", encontada: false},
-    {"src": "/imagenes/death-star.png", encontada: false},
-    {"src": "/imagenes/jedi-order.png", encontada: false},
-    {"src": "/imagenes/light-saber.png", encontada: false},
-    {"src": "/imagenes/millennium-falcon.png", encontada: false},
-    {"src": "/imagenes/r2d2.png", encontada: false}
+    {"src": "darth-vader.png", encontada: false},
+    {"src": "death-star.png", encontada: false},
+    {"src": "jedi-order.png", encontada: false},
+    {"src": "light-saber.png", encontada: false},
+    {"src": "millennium-falcon.png", encontada: false},
+    {"src": "r2d2.png", encontada: false}
 ]
 
 function CartaSeparada({carta, administrarEleccion, volteada}){
@@ -26,7 +26,7 @@ function CartaSeparada({carta, administrarEleccion, volteada}){
             <img 
             className = 'vuelta' 
             alt = 'volteada-carta' 
-            src = '/imagenes/star_wars_logo.gif'
+            src = 'star_wars_logo.gif'
             onClick = {establecerClick}
             />
         </div>
